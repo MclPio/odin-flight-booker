@@ -6,7 +6,6 @@
 #   movies = Movie.create([{ name: "Star Wars" }, { name: "Lord of the Rings" }])
 #   Character.create(name: "Luke", movie: movies.first)
 
-
 def seed_airport
   airport_codes = %w[YYZ YVR YUL YYC YEG YOW YWG YHZ YQB YXE YHM YXX YXU YXE YQR
                      YKA YXT YQG YXX YQM]
@@ -15,4 +14,16 @@ def seed_airport
   end
 end
 
-seed_airport
+def seed_flights
+  Airport.all.each_slice(2) do |airport_1, airport_2|
+    flight_duration = rand(1..8)
+    start_datetime = rand(1.month).seconds.from_now
+    flight = Flight.new(flight_duration: flight_duration, start_datetime: start_datetime)
+    flight.departure_airport = airport_1
+    flight.arrival_airport = airport_2
+    flight.save
+  end
+end
+
+#seed_airport
+#seed_flights
