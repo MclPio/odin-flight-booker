@@ -1,24 +1,11 @@
 # README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+[Project: Flight Booker](https://www.theodinproject.com/lessons/ruby-on-rails-flight-booker)
 
-Things you may want to cover:
+The goal of this project is to work with advanced forms, by building three steps of an airline's checkout process.
 
-* Ruby version
+1. Selecting dates and airports to search
+2. Choosing a flight
+3. Entering passenger information
 
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+Thi swill be a one-way flight booker.
