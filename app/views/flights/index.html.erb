@@ -1,0 +1,24 @@
+<h3>Book a Flight</h3>
+
+<%= form_with scope: :flight, url: flights_url, method: :get do |form| %>
+  <%= form.label :departure_airport_id, "From:" %>
+  <%= form.select(:departure_airport_id, @departure_flight_options) %>
+  
+  <%= form.label :arrival_airport_id, "To:" %>
+  <%= form.select(:arrival_airport_id, @arrival_flight_options) %>
+
+  <%= form.label :date, "Travel Date" %>
+  <%= form.select(:date, @date_options) %>
+
+  <%= form.label :num_tickets, "Select Passengers" %>
+  <%= form.select(:num_tickets, @passenger_options) %>
+
+  <%= form.submit "Search" %>
+<% end %>
+
+<% @available_flights.each do |flight| %>
+  <%= flight.departure_airport.code %>
+  <%= flight.arrival_airport.code %>
+  <%= flight.start_datetime.strftime("%m/%d/%Y") %>
+  <%= flight.flight_duration %>
+<% end %>
