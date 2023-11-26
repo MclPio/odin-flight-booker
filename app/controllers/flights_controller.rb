@@ -8,6 +8,7 @@ class FlightsController < ApplicationController
     @passenger_options = [[1, 1], [2, 2], [3, 3], [4, 4]]
     @date_options = Flight.all.map { |f| [f.start_datetime.strftime("%m/%d/%Y") , f.start_datetime.strftime("%Y%m%d")] }.sort.uniq
 
+    #Sketchy Function
     if params[:commit].present?
       @available_flights = available_flights
     end
@@ -18,7 +19,7 @@ class FlightsController < ApplicationController
   def flight_params
     params.require(:flight).permit(:departure_code, :arrival_code, :date, :num_tickets, :commit)
   end
-
+  #Should this be here or as a scope or class in my model?
   def available_flights
     selected_date = Date.parse(params[:flight][:date])
     start_of_day = selected_date.beginning_of_day
