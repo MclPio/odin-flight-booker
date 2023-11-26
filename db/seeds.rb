@@ -9,7 +9,7 @@
 # rake db:reset db:seed
 
 def seed_airport
-  airport_codes = %w[YYZ YVR YUL]
+  airport_codes = %w[YYZ YVR YUL YYC YEG]
   airport_codes.each do |airport|
     Airport.create(code: airport)
   end
@@ -21,7 +21,7 @@ def start_datetime_gen(days)
 end
 
 def seed_flights
-  future_dates = [1, 6, 9, 14, 21]
+  future_dates = [1, 6, 9, 14, 21, 28, 35, 42, 49]
 
   future_dates.each do |d|
     Airport.all.each do |airport1|

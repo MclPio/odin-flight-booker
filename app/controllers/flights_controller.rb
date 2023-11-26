@@ -6,11 +6,11 @@ class FlightsController < ApplicationController
     @departure_flight_options = Flight.all.map { |f| [f.departure_airport.code, f.departure_airport_id] }.uniq
     @arrival_flight_options = Flight.all.map { |f| [f.arrival_airport.code, f.arrival_airport_id] }.uniq
     @passenger_options = [[1, 1], [2, 2], [3, 3], [4, 4]]
-    @date_options = Flight.all.map { |f| [f.start_datetime.strftime("%m/%d/%Y") , f.start_datetime.strftime("%Y%m%d")] }.sort.uniq
+    @date_options = Flight.all.map { |f| [f.start_datetime.strftime("%m/%d/%Y") , f.start_datetime.strftime("%Y%m%d")] }.uniq
 
-    #Sketchy Function
     if params[:commit].present?
       @available_flights = available_flights
+      @passengers = params[:flight][:num_tickets]
     end
   end
 

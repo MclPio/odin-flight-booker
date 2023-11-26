@@ -16,11 +16,21 @@
   <%= form.submit "Search" %>
 <% end %>
 
-<h3>Availalble Flights</h3>
-
-<%# @available_flights.each do |flight| %>
-  <%# flight.departure_airport.code %>
-  <%# flight.arrival_airport.code %>
-  <%# flight.start_datetime.strftime("%m/%d/%Y") %>
-  <%# flight.flight_duration %>
-<%# end %>
+<% if @available_flights.present? %>
+<h3>Available Flights</h3>
+<form accept-charset="UTF-8" action="/new_booking" method="get">
+  <input name="authenticity_token" type="hidden" value="<%= form_authenticity_token %>">
+  <input name="num_tickets" type="hidden" value="<%= @passengers %>">
+  <% @available_flights.each do |flight| %>
+    <input type='radio' id='flight' name='flight_id' value="<%= flight.id %>"> 
+    <label for='flight'>
+    <%= flight.departure_airport.code %> --> 
+    <%= flight.arrival_airport.code %>,
+    <%= flight.start_datetime.ctime %>,
+    Flight Duration: <%= flight.flight_duration %> hours
+    </label>
+  <% end %>
+  <br>
+  <input type="submit" value="Submit">
+</form>
+<% end %>
