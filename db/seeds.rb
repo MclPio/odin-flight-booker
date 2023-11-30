@@ -42,3 +42,7 @@ end
 
 seed_airport
 seed_flights
+
+#testing new model:
+# passenger_1 = Passenger.create(name: 'bob', email: 'bob@world.co')
+# booking_1 = Booking.create.flight = Flight.first

@@ -2,11 +2,11 @@ class FlightsController < ApplicationController
   #"/flights?departure_airport=YYZ&arrival_airport=YVR&date=20231126&passengers=1&commit=Search"
 
   def index
-    @flights = Flight.all
-    @departure_flight_options = Flight.all.map { |f| [f.departure_airport.code, f.departure_airport_id] }.uniq
-    @arrival_flight_options = Flight.all.map { |f| [f.arrival_airport.code, f.arrival_airport_id] }.uniq
+    @flights = Flight.includes(:departure_airport, :arrival_airport).all
+    @departure_flight_options = @flights.map { |f| [f.departure_airport.code, f.departure_airport_id] }.uniq
+    @arrival_flight_options = @flights.map { |f| [f.arrival_airport.code, f.arrival_airport_id] }.uniq
     @passenger_options = [[1, 1], [2, 2], [3, 3], [4, 4]]
-    @date_options = Flight.all.map { |f| [f.start_datetime.strftime("%m/%d/%Y") , f.start_datetime.strftime("%Y%m%d")] }.uniq
+    @date_options = @flights.map { |f| [f.start_datetime.strftime("%m/%d/%Y") , f.start_datetime.strftime("%Y%m%d")] }.uniq
 
     if params[:commit].present?
       @available_flights = available_flights
