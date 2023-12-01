@@ -1,7 +1,3 @@
-<%# render a form for a new booking which displays the currently chosen date, airports, flight ID and a set of fields to enter personal information 
-for each passenger. You’ll want to create a new blank Passenger object in your controller for each passenger, and then use #fields_for in the 
-view to set up the sub-forms %>
-
 <h3>New Booking</h3>
 <ul>
     <li><%= @flight.start_datetime.strftime("%a, %b %d, %Y") %>
@@ -12,6 +8,7 @@ view to set up the sub-forms %>
     <li>Flight ID: <%= @flight.id%></li>
   </ul>
 <h3>Passenger Info</h3>
+<%# edits may be necessary to make sure the params submit to a specific convention %>
 <%= form_with model: @booking do |form| %>
   <%= form.fields_for :passengers, @booking.passengers do |passengers_form| %>
     <h4>Passenger <%= passengers_form.options[:child_index] + 1%></h4>
