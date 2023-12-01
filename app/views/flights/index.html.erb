@@ -18,11 +18,11 @@
 
 <% if @available_flights.present? %>
 <h3>Available Flights</h3>
-<form accept-charset="UTF-8" action="/new_booking" method="get">
+<form accept-charset="UTF-8" action=<%= new_booking_path %> method="get">
   <input name="authenticity_token" type="hidden" value="<%= form_authenticity_token %>">
-  <input name="num_tickets" type="hidden" value="<%= @passengers %>">
+  <input id="booking_tickets" name="booking[tickets]" type="hidden" value="<%= @passengers %>">
   <% @available_flights.each do |flight| %>
-    <input type='radio' id='flight' name='flight_id' value="<%= flight.id %>"> 
+    <input type='radio' id='booking_flight_id' name='booking[flight_id]' value="<%= flight.id %>"> 
     <label for='flight'>
     <%= flight.departure_airport.code %> --> 
     <%= flight.arrival_airport.code %>,
