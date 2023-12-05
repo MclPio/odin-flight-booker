@@ -8,25 +8,22 @@
     <li>Flight ID: <%= @booking.flight.id%></li>
   </ul>
 <h3>Passenger Info</h3>
-<%# edits may be necessary to make sure the params submit to a specific convention %>
+<% if @booking.errors.any? %>
+Error
+  <ul>
+    <% @booking.errors.each do |error| %>
+      <li><%= error.full_message %></li>
+    <% end %>
+  </ul>
+<% end %>
 <%= form_with model: @booking do |form| %>
   <%= form.hidden_field(:flight_id)%>
   <%= form.fields_for :passengers do |passengers_form| %><%# try deleting @booking.passengers to see if submitted attributes change%>
     <h4>Passenger <%= passengers_form.options[:child_index] + 1%></h4>
-    <li>
       <%= passengers_form.label :name %>
       <%= passengers_form.text_field :name%>
       <%= passengers_form.label :email %>
       <%= passengers_form.text_field :email%>
-    </li>
   <% end %>
   <%= form.submit %>
 <% end %>
-
-<%#
-  Parameters: {"authenticity_token"=>"[FILTERED]", 
-  "booking"=>{"passengers_attributes"=>{"0"=>{"name"=>"bob", "email"=>"bob@world.co"}, 
-                                        "1"=>{"name"=>"tom", "email"=>"tom@world.co"}, 
-                                        "2"=>{"name"=>"joe", "email"=>"joe@world.co"}}}, 
-  "commit"=>"Create Booking"}
-%>

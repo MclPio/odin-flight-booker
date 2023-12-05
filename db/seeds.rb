@@ -40,9 +40,17 @@ def seed_flights
   end
 end
 
+def seed_additional_flights
+  Flight.all.each do |flight|
+    Flight.create(departure_airport_id: flight.departure_airport_id, 
+              arrival_airport_id: flight.arrival_airport_id,
+              flight_duration: flight.flight_duration,
+              start_datetime: flight.start_datetime + 2.hours)
+ end
+end
 seed_airport
 seed_flights
-
+seed_additional_flights
 #testing new model:
 # passenger_1 = Passenger.create(name: 'bob', email: 'bob@world.co')
 # booking_1 = Booking.create.flight = Flight.first

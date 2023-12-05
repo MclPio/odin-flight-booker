@@ -22,13 +22,15 @@
   <input name="authenticity_token" type="hidden" value="<%= form_authenticity_token %>">
   <input id="booking_tickets" name="booking[tickets]" type="hidden" value="<%= @passengers %>">
   <% @available_flights.each do |flight| %>
-    <input type='radio' id='booking_flight_id' name='booking[flight_id]' value="<%= flight.id %>"> 
-    <label for='flight'>
-    <%= flight.departure_airport.code %> --> 
-    <%= flight.arrival_airport.code %>,
-    <%= flight.start_datetime.ctime %>,
-    Flight Duration: <%= flight.flight_duration %> hours
-    </label>
+    <div>
+      <input type='radio' id='booking_flight_id' name='booking[flight_id]' value="<%= flight.id %>">
+      <label for='flight'>
+      <%= flight.departure_airport.code %> -->
+      <%= flight.arrival_airport.code %>,
+      <%= flight.start_datetime.ctime %>,
+      Flight Duration: <%= flight.flight_duration %> hours
+      </label>
+    </div>
   <% end %>
   <br>
   <input type="submit" value="Submit">

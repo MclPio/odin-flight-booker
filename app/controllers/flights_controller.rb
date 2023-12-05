@@ -19,7 +19,7 @@ class FlightsController < ApplicationController
   def flight_params
     params.require(:flight).permit(:departure_code, :arrival_code, :date, :num_tickets, :commit)
   end
-  #Should this be here or as a scope or class in my model?
+
   def available_flights
     selected_date = Date.parse(params[:flight][:date])
     start_of_day = selected_date.beginning_of_day
@@ -30,5 +30,3 @@ class FlightsController < ApplicationController
                                     start_of_day, end_of_day)
   end
 end
-
-#{"flight"=>{"departure_airport_id"=>"1", "arrival_airport_id"=>"5", "date"=>"20231130", "num_tickets"=>"1"}, "commit"=>"Search"}

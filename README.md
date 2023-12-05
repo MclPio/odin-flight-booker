@@ -7,5 +7,3 @@ The goal of this project is to work with advanced forms, by building three steps
 1. Selecting dates and airports to search
 2. Choosing a flight
 3. Entering passenger information
-
-Thi swill be a one-way flight booker.
