@@ -1,7 +1,6 @@
 class Booking < ApplicationRecord
   belongs_to :flight
   has_many :passengers
-  accepts_nested_attributes_for :passengers, reject_if: lambda {
-    |attributes| attributes['name', 'email'].blank?
-  }
+  accepts_nested_attributes_for :passengers
 end
+#Why is it not rejecting blank attributes?

@@ -1,1 +1,15 @@
-SHOW#BOOKING
+<h3>Flight Information</h3>
+<ul>
+  <li><%= @booking.flight.start_datetime.strftime("%a, %b %d, %Y") %>
+      <b><%= @booking.flight.start_datetime.strftime("%H:%M")%></b>
+  </li>
+  <li>Duration: <%= @booking.flight.flight_duration %> hours</li>
+  <li><%= @booking.flight.departure_airport.code %> to <%= @booking.flight.arrival_airport.code %></li>
+  <li>Flight ID: <%= @booking.flight.id%></li>
+</ul>
+<h3>Passenger Information</h3>
+<ol>
+  <% @booking.passengers.each do |passenger| %>
+    <li><%= passenger.name %></li>
+  <% end %>
+</ol>

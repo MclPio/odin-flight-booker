@@ -1,16 +1,17 @@
 <h3>New Booking</h3>
 <ul>
-    <li><%= @flight.start_datetime.strftime("%a, %b %d, %Y") %>
-        <b><%= @flight.start_datetime.strftime("%H:%M")%></b>
+    <li><%= @booking.flight.start_datetime.strftime("%a, %b %d, %Y") %>
+        <b><%= @booking.flight.start_datetime.strftime("%H:%M")%></b>
     </li>
-    <li>Duration: <%= @flight.flight_duration %> hours</li>
-    <li><%= @flight.departure_airport.code %> to <%= @flight.arrival_airport.code %></li>
-    <li>Flight ID: <%= @flight.id%></li>
+    <li>Duration: <%= @booking.flight.flight_duration %> hours</li>
+    <li><%= @booking.flight.departure_airport.code %> to <%= @booking.flight.arrival_airport.code %></li>
+    <li>Flight ID: <%= @booking.flight.id%></li>
   </ul>
 <h3>Passenger Info</h3>
 <%# edits may be necessary to make sure the params submit to a specific convention %>
 <%= form_with model: @booking do |form| %>
-  <%= form.fields_for :passengers, @booking.passengers do |passengers_form| %>
+  <%= form.hidden_field(:flight_id)%>
+  <%= form.fields_for :passengers do |passengers_form| %><%# try deleting @booking.passengers to see if submitted attributes change%>
     <h4>Passenger <%= passengers_form.options[:child_index] + 1%></h4>
     <li>
       <%= passengers_form.label :name %>
@@ -21,3 +22,11 @@
   <% end %>
   <%= form.submit %>
 <% end %>
+
+<%#
+  Parameters: {"authenticity_token"=>"[FILTERED]", 
+  "booking"=>{"passengers_attributes"=>{"0"=>{"name"=>"bob", "email"=>"bob@world.co"}, 
+                                        "1"=>{"name"=>"tom", "email"=>"tom@world.co"}, 
+                                        "2"=>{"name"=>"joe", "email"=>"joe@world.co"}}}, 
+  "commit"=>"Create Booking"}
+%>

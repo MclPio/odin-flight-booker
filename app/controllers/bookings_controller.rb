@@ -1,24 +1,30 @@
 class BookingsController < ApplicationController
   def new
-    @booking = Booking.new(flight_id: params[:booking][:flight_id] )
     @flight = Flight.find(params[:booking][:flight_id])
+    @booking = Booking.new(flight: @flight)
     params[:booking][:tickets].to_i.times { @booking.passengers.build }
   end
 
-  #Need to make efficient create action
+  def show
+    @booking = Booking.find(params[:id])
+  end
+
   def create
-    @booking = Booking.new
-    @booking.flight = @flight
+    @booking = Booking.new(booking_params)
 
-    params[:booking][:passengers_attributes].each do |x|
-      puts x
+    if @booking.save
+      redirect_to @booking
+    else
+      render :new, status: :unprocessable_entity
     end
-
   end
 
   private
-#Need to make sure the way the form is submitting the params is efficient for the create action
+
   def booking_params
-    params.require(:booking).permit(:tickets, :flight_id, passengers_attributes: [:name, :email] )
+    params.require(:booking).permit(:flight_id, passengers_attributes: [:name, :email] )
   end
 end
+
+# Once your form is successfully submitted, render the booking’s #show page which 
+# displays the booking information (flight and passenger information).
