@@ -18,26 +18,17 @@ Error
 <% end %>
 <%= form_with model: @booking do |form| %>
   <%= form.hidden_field(:flight_id)%>
-    <%= form.fields_for :passengers do |passengers_form| %><%# try deleting @booking.passengers to see if submitted attributes change%>
+    <%= form.fields_for :passengers do |passengers_form| %>
       <h4>Passenger <%= passengers_form.options[:child_index] + 1%></h4>
         <%= passengers_form.label :name %>
         <%= passengers_form.text_field :name%>
         <%= passengers_form.label :email %>
         <%= passengers_form.text_field :email%>
     <% end %>
-  <div data-controller="passenger">
-    <button type="button" data-action="passenger#add">Add passenger</button>
+  <div data-controller="passenger" data-passenger-count-value="<%= @tickets %>">
     <div data-passenger-target="addition">
     </div>
-    <template data-passenger-target="template">
-      <%= form.fields_for :passengers do |passengers_form| %><%# try deleting @booking.passengers to see if submitted attributes change%>
-        <h4>Passenger <%= passengers_form.options[:child_index] + 1%></h4>
-          <%= passengers_form.label :name %>
-          <%= passengers_form.text_field :name%>
-          <%= passengers_form.label :email %>
-          <%= passengers_form.text_field :email%>
-      <% end %>
-    </template>
+    <button type="button" data-action="passenger#add">Add passenger</button>
   </div>
   <%= form.submit %>
 <% end %>
