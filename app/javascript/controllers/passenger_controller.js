@@ -1,12 +1,23 @@
 import { Controller } from "@hotwired/stimulus"
+// WIP issue remove button does not exist for initial passengers, remove button 
+// dissapears after clicking create. remove button should not exist for first 
+// passenger.
 
 export default class extends Controller {
   static targets = ["addition"]
   static values = { count: Number }
 
+  connect() {
+    //sets the count value based on h4 found within form.
+    let form = document.querySelector("form");
+    let ele_count = form.querySelectorAll("h4").length;
+    this.countValue = ele_count;
+  }
+
   add() {
     //create div to capture a single passenger
     const container = document.createElement("div");
+    container.id = 'passenger';
 
     //Increment count
     this.countValue++

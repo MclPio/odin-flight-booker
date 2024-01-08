@@ -19,13 +19,15 @@ Error
 <%= form_with model: @booking do |form| %>
   <%= form.hidden_field(:flight_id)%>
     <%= form.fields_for :passengers do |passengers_form| %>
-      <h4>Passenger <%= passengers_form.options[:child_index] + 1%></h4>
-        <%= passengers_form.label :name %>
-        <%= passengers_form.text_field :name%>
-        <%= passengers_form.label :email %>
-        <%= passengers_form.text_field :email%>
-    <% end %>
-  <div data-controller="passenger" data-passenger-count-value="<%= @tickets %>">
+      <div class = "passenger">
+        <h4>Passenger <%= passengers_form.options[:child_index] + 1%></h4>
+          <%= passengers_form.label :name %>
+          <%= passengers_form.text_field :name%>
+          <%= passengers_form.label :email %>
+          <%= passengers_form.text_field :email%>
+            <% end %>
+      </div>
+  <div data-controller="passenger" data-passenger-count-value="">
     <div data-passenger-target="addition">
     </div>
     <button type="button" data-action="passenger#add">Add passenger</button>
