@@ -1,15 +1,15 @@
 <h3>New Booking</h3>
 <ul>
-    <li><%= @booking.flight.start_datetime.strftime("%a, %b %d, %Y") %>
-        <b><%= @booking.flight.start_datetime.strftime("%H:%M")%></b>
-    </li>
-    <li>Duration: <%= @booking.flight.flight_duration %> hours</li>
-    <li><%= @booking.flight.departure_airport.code %> to <%= @booking.flight.arrival_airport.code %></li>
-    <li>Flight ID: <%= @booking.flight.id%></li>
-  </ul>
+  <li><%= @booking.flight.start_datetime.strftime("%a, %b %d, %Y") %>
+    <b><%= @booking.flight.start_datetime.strftime("%H:%M")%></b>
+  </li>
+  <li>Duration: <%= @booking.flight.flight_duration %> hours</li>
+  <li><%= @booking.flight.departure_airport.code %> to <%= @booking.flight.arrival_airport.code %></li>
+  <li>Flight ID: <%= @booking.flight.id%></li>
+</ul>
 <h3>Passenger Info</h3>
 <% if @booking.errors.any? %>
-Error
+  Error
   <ul>
     <% @booking.errors.each do |error| %>
       <li><%= error.full_message %></li>
@@ -18,17 +18,17 @@ Error
 <% end %>
 <%= form_with model: @booking do |form| %>
   <%= form.hidden_field(:flight_id)%>
-    <%= form.fields_for :passengers do |passengers_form| %>
-      <div class = "passenger">
-        <h4>Passenger <%= passengers_form.options[:child_index] + 1%></h4>
+  <div data-controller="passenger" data-passenger-count-value="">
+    <div data-passenger-target="addition">
+      <%= form.fields_for :passengers do |passengers_form| %>
+        <div class = "passenger">
+          <h4>Passenger <%= passengers_form.options[:child_index] + 1%></h4>
           <%= passengers_form.label :name %>
           <%= passengers_form.text_field :name%>
           <%= passengers_form.label :email %>
           <%= passengers_form.text_field :email%>
-            <% end %>
-      </div>
-  <div data-controller="passenger" data-passenger-count-value="">
-    <div data-passenger-target="addition">
+        </div>
+      <% end %>
     </div>
     <button type="button" data-action="passenger#add">Add Passenger</button>
     <button type="button" data-action="passenger#remove">Remove Passenger</button>

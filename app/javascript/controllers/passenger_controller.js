@@ -14,7 +14,7 @@ export default class extends Controller {
   add() {
     //create div to capture a single passenger
     const container = document.createElement("div");
-    container.id = 'passenger';
+    container.className = 'passenger';
 
     //Increment count
     this.countValue++
@@ -63,21 +63,12 @@ export default class extends Controller {
     this.additionTarget.appendChild(container);
   }
 
-  remove(event) {
-    const button = event.currentTarget;
+  remove() {
+    const container = this.additionTarget.querySelectorAll(".passenger");
 
-    const container = this.additionTarget.lastChild
-
-    if (container) {
-      container.remove();
-
-      if (this.countValue > 1) {
-        this.countValue--;
-      }
+    if(container.length > 1){
+      container[container.length - 1].remove();
+      this.countValue--;
     }
   }
 }
-
-// Create booking destroys div heirachy. Need to have front end validation
-// so create only works when fields are valid. Also if somehow create submits
-// and server rejects. do not allow user to add or remove passengers.
