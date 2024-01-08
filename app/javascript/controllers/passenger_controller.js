@@ -1,7 +1,4 @@
 import { Controller } from "@hotwired/stimulus"
-// WIP issue remove button does not exist for initial passengers, remove button 
-// dissapears after clicking create. remove button should not exist for first 
-// passenger.
 
 export default class extends Controller {
   static targets = ["addition"]
@@ -56,11 +53,11 @@ export default class extends Controller {
     container.appendChild(email_field);
 
     //Adding remove button
-    const remove_button = document.createElement("button");
-    remove_button.type = "button";
-    remove_button.dataset.action = "passenger#remove";
-    remove_button.textContent = "Remove";
-    container.appendChild(remove_button);
+    // const remove_button = document.createElement("button");
+    // remove_button.type = "button";
+    // remove_button.dataset.action = "passenger#remove";
+    // remove_button.textContent = "Remove";
+    // container.appendChild(remove_button);
 
     //append the container div to targer
     this.additionTarget.appendChild(container);
@@ -69,12 +66,18 @@ export default class extends Controller {
   remove(event) {
     const button = event.currentTarget;
 
-    const container = button.closest('div');
+    const container = this.additionTarget.lastChild
 
     if (container) {
       container.remove();
 
-      this.countValue--;
+      if (this.countValue > 1) {
+        this.countValue--;
+      }
     }
   }
 }
+
+// Create booking destroys div heirachy. Need to have front end validation
+// so create only works when fields are valid. Also if somehow create submits
+// and server rejects. do not allow user to add or remove passengers.
