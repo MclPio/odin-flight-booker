@@ -1,0 +1,12 @@
+Hello <%= @passenger.name %>,
+Your Flight Is Confirmed:
+
+<h3>Flight Information</h3>
+<ul>
+  <li><%= @passenger.booking.flight.start_datetime.strftime("%a, %b %d, %Y") %>
+      <b><%= @passenger.booking.flight.start_datetime.strftime("%H:%M")%></b>
+  </li>
+  <li>Duration: <%= @passenger.booking.flight.flight_duration %> hours</li>
+  <li><%= @passenger.booking.flight.departure_airport.code %> to <%= @passenger.booking.flight.arrival_airport.code %></li>
+  <li>Flight ID: <%= @passenger.booking.flight.id%></li>
+</ul>
