@@ -11,6 +11,9 @@ class FlightsController < ApplicationController
     if params[:commit].present?
       @available_flights = available_flights
       @passengers = params[:flight][:num_tickets]
+      @selected_departure_airport = params[:flight][:departure_airport_id]
+      @selected_arrival_airport = params[:flight][:arrival_airport_id]
+      @selected_date = params[:flight][:date]
     end
   end
 

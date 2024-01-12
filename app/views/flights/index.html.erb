@@ -2,16 +2,16 @@
 
 <%= form_with scope: :flight, url: flights_url, method: :get do |form| %>
   <%= form.label :departure_airport_id, "From:" %>
-  <%= form.select(:departure_airport_id, @departure_flight_options) %>
+  <%= form.select(:departure_airport_id, @departure_flight_options, selected: @selected_departure_airport) %>
   
   <%= form.label :arrival_airport_id, "To:" %>
-  <%= form.select(:arrival_airport_id, @arrival_flight_options) %>
+  <%= form.select(:arrival_airport_id, @arrival_flight_options, selected: @selected_arrival_airport) %>
 
   <%= form.label :date, "Travel Date" %>
-  <%= form.select(:date, @date_options) %>
+  <%= form.select(:date, @date_options, selected: @selected_date) %>
 
   <%= form.label :num_tickets, "Select Passengers" %>
-  <%= form.select(:num_tickets, @passenger_options) %>
+  <%= form.select(:num_tickets, @passenger_options, selected: @passengers) %>
 
   <%= form.submit "Search" %>
 <% end %>
