@@ -2,12 +2,6 @@ nice to have:
 1. make a task that auto installs css bundler and bulma for new clones
 
 needed:
-1. flights/index.html.erb needs to have label fixed.
 2. style the rest of the application view and email with bulma.
 3. register a new gmail account for mailer and deploy.
 4. Need to seed database when deploying.
-
-1. Current Output
-13:34:36 web.1  | Started GET "/bookings/new?authenticity_token=[FILTERED]&booking%5Btickets%5D=1&booking%5Bflight_id%5D=181" for ::1 at 2024-01-13 13:34:36 -0500
-13:34:36 web.1  | Processing by BookingsController#new as HTML
-13:34:36 web.1  |   Parameters: {"authenticity_token"=>"[FILTERED]", "booking"=>{"tickets"=>"1", "flight_id"=>"181"}}

@@ -1,58 +1,64 @@
-<h1 class="title is-1">Book a Flight</h1>
-<div class="field">
-  <%= form_with scope: :flight, url: flights_url, method: :get do |form| %>
-    <%= form.label :departure_airport_id, "From:", class: 'label' %>
-    <div class="control">
-      <div class="select"><%= form.select(:departure_airport_id, @departure_flight_options, selected: @selected_departure_airport) %></div>
-    </div>
-    <%= form.label :arrival_airport_id, "To:", class: 'label' %>
-    <div class="control">
-      <div class="select"><%= form.select(:arrival_airport_id, @arrival_flight_options, selected: @selected_arrival_airport) %></div>
-    </div>
-    <%= form.label :date, "Travel Date", class: 'label' %>
-    <div class="control">
-      <div class="select"><%= form.select(:date, @date_options, selected: @selected_date) %></div>
-    </div>
-    <%= form.label :num_tickets, "Select Passengers", class: 'label' %>
-    <div class="control">
-      <div class="select"><%= form.select(:num_tickets, @passenger_options, selected: @passengers) %></div>
-    </div>
-    <div class="control"><%= form.submit "Search", class: 'button is-primary' %></div>
-  <% end %>
-</div>
-<% if @available_flights.present? %>
-  <h3 class="title is-3">Available Flights Rails</h3>
-  <%= form_with scope: :booking, url: new_booking_url, method: :get do |form| %>
-    <%= form.hidden_field(:tickets, value: @passengers)%>
-    <% @available_flights.each do |flight| %>
+<div class="section">
+  <div class="container">
+    <h3 class="title is-3">Book a Flight</h3>
+    <%= form_with scope: :flight, url: flights_url, method: :get do |form| %>
       <div class="field">
-        <%= form.radio_button(:flight_id, flight.id, class: 'is-checkradio') %>
-        <%= form.label("#{:flight_id}_#{flight.id}", class: 'label') do %>
-          <div class="columns is-vcentered">
-            <div class="column is-one-quarter">
-              <%= content_tag(:span, flight.departure_airport.code, class: 'has-text-weight-bold') %>
-              <br>
-              <%= content_tag(:span, "Departure", class: 'has-text-grey-light') %>
-            </div>
-            <div class="column is-one-quarter">
-              <%= content_tag(:span, flight.arrival_airport.code, class: 'has-text-weight-bold') %>
-              <br>
-              <%= content_tag(:span, "Arrival", class: 'has-text-grey-light') %>
-            </div>
-            <div class="column is-one-quarter">
-              <%= content_tag(:span, flight.start_datetime.ctime, class: 'has-text-weight-bold') %>
-              <br>
-              <%= content_tag(:span, "Departure Time", class: 'has-text-grey-light') %>
-            </div>
-            <div class="column is-one-quarter">
-              <%= content_tag(:span, flight.flight_duration, class: 'has-text-weight-bold') %>
-              <br>
-              <%= content_tag(:span, "Duration", class: 'has-text-grey-light') %>
-            </div>
+        <%= form.label :departure_airport_id, "From:", class: 'label' %>
+        <div class="control">
+          <div class="select"><%= form.select(:departure_airport_id, @departure_flight_options, selected: @selected_departure_airport) %></div>
+        </div>
+        <%= form.label :arrival_airport_id, "To:", class: 'label' %>
+        <div class="control">
+          <div class="select"><%= form.select(:arrival_airport_id, @arrival_flight_options, selected: @selected_arrival_airport) %></div>
+        </div>
+        <%= form.label :date, "Travel Date", class: 'label' %>
+        <div class="control">
+          <div class="select"><%= form.select(:date, @date_options, selected: @selected_date) %></div>
+        </div>
+        <%= form.label :num_tickets, "Select Passengers", class: 'label' %>
+        <div class="control">
+          <div class="select"><%= form.select(:num_tickets, @passenger_options, selected: @passengers) %></div>
+        </div>
+      </div>
+      <div class="control"><%= form.submit "Search", class: 'button is-primary' %></div>
+    <% end %>
+  </div>
+  <div class="container">
+    <% if @available_flights.present? %>
+      <h3 class="title is-3">Available Flights</h3>
+      <%= form_with scope: :booking, url: new_booking_url, method: :get do |form| %>
+        <%= form.hidden_field(:tickets, value: @passengers)%>
+        <% @available_flights.each do |flight| %>
+          <div class="field">
+            <%= form.radio_button(:flight_id, flight.id, class: 'is-checkradio') %>
+            <%= form.label("#{:flight_id}_#{flight.id}", class: 'label') do %>
+              <div class="columns is-vcentered">
+                <div class="column is-one-quarter">
+                  <%= content_tag(:span, flight.departure_airport.code, class: 'has-text-weight-bold') %>
+                  <br>
+                  <%= content_tag(:span, "Departure", class: 'has-text-grey-light') %>
+                </div>
+                <div class="column is-one-quarter">
+                  <%= content_tag(:span, flight.arrival_airport.code, class: 'has-text-weight-bold') %>
+                  <br>
+                  <%= content_tag(:span, "Arrival", class: 'has-text-grey-light') %>
+                </div>
+                <div class="column is-one-quarter">
+                  <%= content_tag(:span, flight.start_datetime.strftime("%a, %b %d, %Y %H:%M"), class: 'has-text-weight-bold') %>
+                  <br>
+                  <%= content_tag(:span, "Departure Time", class: 'has-text-grey-light') %>
+                </div>
+                <div class="column is-one-quarter">
+                  <%= content_tag(:span, "#{flight.flight_duration.to_i} hr", class: 'has-text-weight-bold') %>
+                  <br>
+                  <%= content_tag(:span, "Duration", class: 'has-text-grey-light') %>
+                </div>
+              </div>
+            <% end %>
           </div>
         <% end %>
-      </div>
+        <div class="control"><%= form.submit "Submit", class: "button is-primary"%></div>
+      <% end %>
     <% end %>
-    <div class="control"><%= form.submit "Submit", class: "button is-primary"%></div>
-  <% end %>
-<% end %>
+  </div>
+</div>
