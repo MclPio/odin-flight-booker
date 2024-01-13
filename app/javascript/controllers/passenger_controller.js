@@ -20,38 +20,52 @@ export default class extends Controller {
     this.countValue++
     
     const header = document.createElement("h4");
-    const header_node = document.createTextNode(`Passenger ${this.countValue}`); // Need to have a counter
-    header.appendChild(header_node);
+    header.className = 'title is-4';
+    header.textContent = `Passenger ${this.countValue}`
     container.appendChild(header);
+
+    //Create field for the name
+    const nameFieldContainer = document.createElement("div");
+    nameFieldContainer.className = 'field';
 
     //Adding name label
     const name_label = document.createElement("label");
-    const name_text = document.createTextNode("Name");
+    name_label.className = 'label';
     name_label.setAttribute("for", `booking_passengers_attributes_${this.countValue - 1}_name`);
-    name_label.appendChild(name_text);
-    container.appendChild(name_label);
+    name_label.textContent = 'Name';
+    nameFieldContainer.appendChild(name_label);
 
     //Adding name field
-    const name_field = document.createElement("input");
-    name_field.type = "text";
-    name_field.name = `booking[passengers_attributes][${this.countValue - 1}][name]`;
-    name_field.id = `booking_passengers_attributes_${this.countValue - 1}_name`
-    container.appendChild(name_field);
+    const nameInput = document.createElement("input");
+    nameInput.className = 'input';
+    nameInput.type = 'text';
+    nameInput.name = `booking[passengers_attributes][${this.countValue - 1}][name]`;
+    nameInput.id = `booking_passengers_attributes_${this.countValue - 1}_name`;
+    nameFieldContainer.appendChild(nameInput);
+
+    container.appendChild(nameFieldContainer);
+  
+    // Create field for the email
+    const emailFieldContainer = document.createElement("div");
+    emailFieldContainer.className = 'field';
 
     //Adding email label
-    const email_label = document.createElement("label");
-    const email_text = document.createTextNode("Email");
-    email_label.setAttribute("for", `booking_passengers_attributes_${this.countValue - 1}_email`);
-    email_label.appendChild(email_text);
-    container.appendChild(email_label);
+    const emailLabel = document.createElement("label");
+    emailLabel.className = 'label';
+    emailLabel.setAttribute("for", `booking_passengers_attributes_${this.countValue - 1}_email`);
+    emailLabel.textContent = 'Email';
+    emailFieldContainer.appendChild(emailLabel);
 
     //Adding email field
-    const email_field = document.createElement("input");
-    email_field.type = "text";
-    email_field.name = `booking[passengers_attributes][${this.countValue - 1}][email]`;
-    email_field.id = `booking_passengers_attributes_${this.countValue - 1}_email`
-    container.appendChild(email_field);
+    const emailInput = document.createElement("input");
+    emailInput.className = 'input';
+    emailInput.type = 'text';
+    emailInput.name = `booking[passengers_attributes][${this.countValue - 1}][email]`;
+    emailInput.id = `booking_passengers_attributes_${this.countValue - 1}_email`;
+    emailFieldContainer.appendChild(emailInput);
 
+    container.appendChild(emailFieldContainer);
+  
     //Adding remove button
     // const remove_button = document.createElement("button");
     // remove_button.type = "button";
