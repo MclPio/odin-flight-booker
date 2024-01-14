@@ -1,6 +1,7 @@
 # Project: Flight Booker
 
-[Link](https://www.theodinproject.com/lessons/ruby-on-rails-flight-booker)
+- [Project Link](https://www.theodinproject.com/lessons/ruby-on-rails-flight-booker)
+- [Live App](https://mclpio-flight-booker.fly.dev/)
 
 The goal of this project is to work with advanced forms, by building three steps of an airline's checkout process.
 
