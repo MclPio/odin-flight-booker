@@ -8,7 +8,7 @@ The goal of this project is to work with advanced forms, by building three steps
 2. Choosing a flight
 3. Entering passenger information
 
-#Set up
+## Set up
 
 - git clone git@github.com:MclPio/odin-flight-booker.git
 - $ ```bundle install```
