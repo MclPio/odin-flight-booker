@@ -73,3 +73,5 @@ end
 gem "letter_opener", group: :development
 
 gem 'cssbundling-rails'
+
+gem "figaro"

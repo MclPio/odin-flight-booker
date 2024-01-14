@@ -2,6 +2,5 @@ nice to have:
 1. make a task that auto installs css bundler and bulma for new clones
 
 needed:
-2. style the rest of the application view and email with bulma.
 3. register a new gmail account for mailer and deploy.
 4. Need to seed database when deploying.
