@@ -1,5 +1,5 @@
 class PassengerMailer < ApplicationMailer
-  default from: 'notifications@example.com'
+  default from: 'mclpious@gmail.com'
 
   def flight_confirmation(passenger=nil)
     if passenger.nil?

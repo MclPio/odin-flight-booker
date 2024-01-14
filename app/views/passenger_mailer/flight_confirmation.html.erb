@@ -1,12 +1,53 @@
-Hello <%= @passenger.name %>,
-Your Flight Is Confirmed:
+<!DOCTYPE html>
+<html>
+<head>
+  <style>
+    /* Inline styles for email compatibility */
+    .container {
+      font-family: Arial, sans-serif;
+      margin: 0 auto;
+      padding: 20px;
+      max-width: 600px;
+    }
 
-<h3>Flight Information</h3>
-<ul>
-  <li><%= @passenger.booking.flight.start_datetime.strftime("%a, %b %d, %Y") %>
-      <b><%= @passenger.booking.flight.start_datetime.strftime("%H:%M")%></b>
-  </li>
-  <li>Duration: <%= @passenger.booking.flight.flight_duration %> hours</li>
-  <li><%= @passenger.booking.flight.departure_airport.code %> to <%= @passenger.booking.flight.arrival_airport.code %></li>
-  <li>Flight ID: <%= @passenger.booking.flight.id%></li>
-</ul>
+    .title {
+      font-size: 24px;
+      font-weight: bold;
+      margin-bottom: 20px;
+    }
+
+    ul {
+      list-style-type: none;
+      padding-left: 0;
+    }
+
+    li {
+      font-size: 18px;
+      margin-bottom: 10px;
+    }
+
+    b {
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1 class="title">Hello <%= @passenger.name %>,</h1>
+    
+    <p>Your Flight Is Confirmed:</p>
+
+    <h2 class="title">Flight Information</h2>
+    <ul>
+      <li><b>Date:</b> <%= @passenger.booking.flight.start_datetime.strftime("%a, %b %d, %Y") %> <b>Time:</b> <%= @passenger.booking.flight.start_datetime.strftime("%H:%M")%></li>
+      <li><b>Duration:</b> <%= @passenger.booking.flight.flight_duration %> hours</li>
+      <li><b>Route:</b> <%= @passenger.booking.flight.departure_airport.code %> to <%= @passenger.booking.flight.arrival_airport.code %></li>
+      <li><b>Flight ID:</b> <%= @passenger.booking.flight.id %></li>
+    </ul>
+
+    <!-- You can add additional information here, such as contact details, boarding information, etc. -->
+    <p>If you have any questions or need further assistance, please contact us at mclpious@gmail.com.</p>
+    <p>Thanks</p>
+  </div>
+</body>
+</html>

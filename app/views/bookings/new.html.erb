@@ -1,37 +1,84 @@
-<h3>New Booking</h3>
-<ul>
-  <li><%= @booking.flight.start_datetime.strftime("%a, %b %d, %Y") %>
-    <b><%= @booking.flight.start_datetime.strftime("%H:%M")%></b>
-  </li>
-  <li>Duration: <%= @booking.flight.flight_duration %> hours</li>
-  <li><%= @booking.flight.departure_airport.code %> to <%= @booking.flight.arrival_airport.code %></li>
-  <li>Flight ID: <%= @booking.flight.id%></li>
-</ul>
-<h3>Passenger Info</h3>
-<% if @booking.errors.any? %>
-  Error
-  <ul>
-    <% @booking.errors.each do |error| %>
-      <li><%= error.full_message %></li>
+<div class="section">
+  <div class="container">
+    <h3 class="title is-3">New Booking</h3>
+    <ul class="box">
+      <li class="is-size-5">
+        <span class="has-text-weight-bold">Date:</span>
+        <%= @booking.flight.start_datetime.strftime("%a, %b %d, %Y") %>
+        <span class="has-text-weight-bold">Time:</span>
+        <b><%= @booking.flight.start_datetime.strftime("%H:%M") %></b>
+      </li>
+      <li class="is-size-5">
+        <span class="has-text-weight-bold">Duration:</span>
+        <%= @booking.flight.flight_duration.to_i %> hr
+      </li>
+      <li class="is-size-5">
+        <span class="has-text-weight-bold">Route:</span>
+        <%= @booking.flight.departure_airport.code %> to <%= @booking.flight.arrival_airport.code %>
+      </li>
+      <li class="is-size-5">
+        <span class="has-text-weight-bold">Flight ID:</span>
+        <%= @booking.flight.id %>
+      </li>
+    </ul>
+  </div>
+</div>
+<div class="section">
+  <div class="container">
+    <h3 class="title is-3">Passenger Info</h3>
+
+    <% if @booking.errors.any? %>
+      <div class="notification is-danger">
+        <p>Error:</p>
+        <ul>
+          <% @booking.errors.each do |error| %>
+            <li><%= error.full_message %></li>
+          <% end %>
+        </ul>
+      </div>
     <% end %>
-  </ul>
-<% end %>
-<%= form_with model: @booking do |form| %>
-  <%= form.hidden_field(:flight_id)%>
+
+<%= form_with model: @booking, class: 'passenger-form' do |form| %>
+  <%= form.hidden_field(:flight_id) %>
   <div data-controller="passenger" data-passenger-count-value="">
     <div data-passenger-target="addition">
       <%= form.fields_for :passengers do |passengers_form| %>
-        <div class = "passenger">
-          <h4>Passenger <%= passengers_form.options[:child_index] + 1%></h4>
-          <%= passengers_form.label :name %>
-          <%= passengers_form.text_field :name%>
-          <%= passengers_form.label :email %>
-          <%= passengers_form.text_field :email%>
+        <div class="passenger">
+          <h4 class="title is-4">Passenger <%= passengers_form.options[:child_index] + 1 %></h4>
+          <div class="field">
+            <%= passengers_form.label :name, class: 'label' %>
+            <div class="control">
+              <%= passengers_form.text_field :name, class: 'input' %>
+            </div>
+          </div>
+          <div class="field">
+            <%= passengers_form.label :email, class: 'label' %>
+            <div class="control">
+              <%= passengers_form.text_field :email, class: 'input' %>
+            </div>
+          </div>
         </div>
       <% end %>
     </div>
-    <button type="button" data-action="passenger#add">Add Passenger</button>
-    <button type="button" data-action="passenger#remove">Remove Passenger</button>
+    
+    <!-- Add some margin and padding between passengers and buttons -->
+    <div class="mt-4"> <!-- mt-4 adds margin-top -->
+      <div class="field is-grouped">
+        <div class="control">
+          <button type="button" data-action="passenger#add" class="button is-success">Add Passenger</button>
+        </div>
+        <div class="control">
+          <button type="button" data-action="passenger#remove" class="button is-danger">Remove Passenger</button>
+        </div>
+      </div>
+    </div>
+    
+    <div class="field mt-4"> <!-- mt-4 adds margin-top -->
+      <div class="control">
+        <%= form.submit "Submit", class: 'button is-primary' %>
+      </div>
+    </div>
   </div>
-  <%= form.submit %>
 <% end %>
+  </div>
+</div>

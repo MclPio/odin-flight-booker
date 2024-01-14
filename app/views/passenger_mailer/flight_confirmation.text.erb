@@ -1,11 +1,13 @@
 Hello <%= @passenger.name %>,
+
 Your Flight Is Confirmed:
 
-Flight Information
+Flight Information:
+- Date: <%= @passenger.booking.flight.start_datetime.strftime("%a, %b %d, %Y") %> | Time: <%= @passenger.booking.flight.start_datetime.strftime("%H:%M")%>
+- Duration: <%= @passenger.booking.flight.flight_duration %> hours
+- Route: <%= @passenger.booking.flight.departure_airport.code %> to <%= @passenger.booking.flight.arrival_airport.code %>
+- Flight ID: <%= @passenger.booking.flight.id %>
 
-<%= @passenger.booking.flight.start_datetime.strftime("%a, %b %d, %Y") %>
-<%= @passenger.booking.flight.start_datetime.strftime("%H:%M")%>
-Duration: <%= @passenger.booking.flight.flight_duration %> hours
-<%= @passenger.booking.flight.departure_airport.code %> to <%= @passenger.booking.flight.arrival_airport.code %>
-Flight ID: <%= @passenger.booking.flight.id%>
+If you have any questions or need further assistance, please contact us at mclpious@gmail.com.
 
+Thanks
